@@ -1,0 +1,21 @@
+{%extends 'base.html' %}
+{% block content %}
+
+    <h3>
+        Adicionar Novo Carro
+    </h3>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ add_new_car.as_table }}
+            
+        </table>
+        <input type="submit" value = "Cadastrar" class= "btn btn-primary">
+
+        
+        
+
+    </form>
+    
+{% endblock %}
