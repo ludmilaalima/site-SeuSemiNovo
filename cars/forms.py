@@ -49,6 +49,11 @@ class CarForm(forms.ModelForm):
         if price < 8000:
             self.add_error('price', "Valor mínimo do carro é de R$8.000")
 
+    def clean_factory_year(self):
+        factory_year = self.cleaned_data['factory_year']
+        if factory_year < 1975:
+            self.add_error('factory_year', "Não é possível adicionar carros fabricados antes de 1975")
+            
 
 
 
