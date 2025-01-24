@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from cars.views import cars_view
 from cars.views import add_new_car
+from accounts.views import register_view
 
 
 
@@ -27,6 +28,7 @@ from cars.views import add_new_car
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('register/', register_view, name='register'),
     path('cars/', cars_view, name='cars_list'),
     path('add-new_car/', add_new_car, name='new_car')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
