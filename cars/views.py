@@ -37,4 +37,4 @@ def add_new_car(request):
         'new_car.html',
         {'add_new_car': add_new_car}  # Certifique-se de usar o mesmo nome aqui
     )
-
+''
