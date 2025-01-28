@@ -18,8 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from cars.views import cars_view
-from cars.views import add_new_car
+from cars.views import  AddNewCarView, CarsView
 from accounts.views import register_view, login_view, logout_view
 
 
@@ -29,8 +28,8 @@ from accounts.views import register_view, login_view, logout_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register_view, name='register'),
-    path('cars/', cars_view, name='cars_list'),
-    path('add-new_car/', add_new_car, name='new_car'),
+    path('cars/', CarsView.as_view(), name='cars_list'),
+    path('add-new_car/', AddNewCarView.as_view(), name='new_car'),
     path('logout/', logout_view, name='logout'),
     path('login/', login_view, name='login')
 
