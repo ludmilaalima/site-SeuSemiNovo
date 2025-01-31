@@ -3,6 +3,8 @@ from cars.models import Car
 from cars.forms import CarForm
 from django.views import View
 from django.views.generic import ListView
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -14,6 +16,20 @@ class CarListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset().order_by('model')
+        search = self.request.GET.get('search')
+        if search:
+            queryset = queryset.filter(model__icontains=search)
+
+        return queryset
+
+
+
+
+class AddNewCarCreateView(CreateView):
+    model = Car
+    template_name = 'new_car.html'
+    form_class = CarForm
+    success_url = reverse_lazy('cars_list')
 
 
 
@@ -34,7 +50,8 @@ class CarListView(ListView):
     
 
 
-class AddNewCarView(View):
+
+'''class AddNewCarView(View):
 
     def get(self, request):
         add_new_car = CarForm()
@@ -57,7 +74,7 @@ class AddNewCarView(View):
         request,
         'new_car.html',
         {'add_new_car': add_new_car}  
-    )
+    )'''
 
 
 
