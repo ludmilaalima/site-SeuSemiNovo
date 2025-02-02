@@ -2,12 +2,18 @@ from django.shortcuts import render, redirect
 from cars.models import Car
 from cars.forms import CarForm
 from django.views import View
-from django.views.generic import ListView
-from django.views.generic.edit import CreateView
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 # Create your views here.
 
+
+class AddNewCarCreateView(CreateView):
+    model = Car
+    template_name = 'new_car.html'
+    form_class = CarForm
+    success_url = reverse_lazy('cars_list')
 
 class CarListView(ListView):
     model = Car
@@ -21,15 +27,31 @@ class CarListView(ListView):
             queryset = queryset.filter(model__icontains=search)
 
         return queryset
+    
 
-
-
-
-class AddNewCarCreateView(CreateView):
+class CarDetailView(DetailView):
     model = Car
-    template_name = 'new_car.html'
+    template_name = 'cars_detail.html'
+    context_object_name = 'car'
+
+
+class CarUpdateView(UpdateView):
+    model = Car
     form_class = CarForm
+    template_name = 'update_car.html'
     success_url = reverse_lazy('cars_list')
+
+
+class CarDeleteView(DeleteView):
+    model = Car
+    template_name = 'delete_car.html'
+    success_url = reverse_lazy('cars_list')
+
+
+
+
+
+
 
 
 
