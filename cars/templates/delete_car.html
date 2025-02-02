@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<form method="post">
+    {% csrf_token %}
+    <h1>Tem certeza que deseja excluir ""{{ object.model }}"" ?</h1>
+
+    <button type="submit">Confirmar Exclusão</button>
+    <a href="{% url 'cars_list' %}">Cancelar</a>
+
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock%}
