@@ -39,7 +39,9 @@ class CarUpdateView(UpdateView):
     model = Car
     form_class = CarForm
     template_name = 'update_car.html'
-    success_url = reverse_lazy('cars_list')
+
+    def get_success_url(self):
+        return reverse_lazy('car_detail', kwargs={'pk': self.object.pk})
 
 
 class CarDeleteView(DeleteView):
