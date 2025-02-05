@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from cars.models import Car
 from cars.forms import CarForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -9,11 +11,6 @@ from django.urls import reverse_lazy
 # Create your views here.
 
 
-class AddNewCarCreateView(CreateView):
-    model = Car
-    template_name = 'new_car.html'
-    form_class = CarForm
-    success_url = reverse_lazy('cars_list')
 
 class CarListView(ListView):
     model = Car
@@ -35,6 +32,15 @@ class CarDetailView(DetailView):
     context_object_name = 'car'
 
 
+
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class AddNewCarCreateView(CreateView):
+    model = Car
+    template_name = 'new_car.html'
+    form_class = CarForm
+    success_url = reverse_lazy('cars_list')
+
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class CarUpdateView(UpdateView):
     model = Car
     form_class = CarForm
@@ -43,7 +49,7 @@ class CarUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('car_detail', kwargs={'pk': self.object.pk})
 
-
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class CarDeleteView(DeleteView):
     model = Car
     template_name = 'delete_car.html'
