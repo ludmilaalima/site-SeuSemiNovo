@@ -56,6 +56,9 @@ class CarDeleteView(DeleteView):
     success_url = reverse_lazy('cars_list')
 
 
+#
+
+
 
 
 
