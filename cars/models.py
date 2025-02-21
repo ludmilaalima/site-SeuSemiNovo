@@ -43,7 +43,7 @@ class Car(models.Model):
         return self.model
     
 
-    class CarInventory(models.Model):
+class CarInventory(models.Model):
         cars_count = models.FloatField()
         cars_value_total = models.IntegerField()
         created_at = models.DateTimeField(auto_now_add=True)
@@ -51,6 +51,7 @@ class Car(models.Model):
 
         class Meta:
             ordering = ['-created_at']
+            db_table = 'car_inventory'
 
 
         
