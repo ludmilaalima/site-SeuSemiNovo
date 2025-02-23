@@ -10,3 +10,8 @@ def car_post_save(sender, instance, created, **kwargs):
 
     if created:
         CarInventory.objects.create(cars_count=new_register_count, cars_value_total=new_register_value_total)
+
+@receiver(post_delete, sender=Car)
+def car_post_delete(sender, instance, created, **kwargs):
+    count_after_delete = Car.objects.count()
+    sum_after_delete = Car.objects.aggregate(cars_value_total=Sum('price')) ['cars_value_total'] or 0
