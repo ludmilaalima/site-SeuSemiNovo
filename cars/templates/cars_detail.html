@@ -86,8 +86,8 @@
       <p><strong>Ano do modelo:</strong> {{ object.model_year }}</p>
       <p><strong>Placa:</strong> {{ object.plate }}</p>
       <p><strong>Preço:</strong> R$ {{ object.price }}</p>
-      {% if object.bio  %}
-        <p><strong>Descrição:</strong> {{ object.bio }}</p>
+      {% if object.description  %}
+        <p><strong>Descrição:</strong> {{ object.description }}</p>
       {% endif %}
       {% if user.is_authenticated %}
         <a href="{% url 'update_car' car.pk %}">EDITAR</a>
