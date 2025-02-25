@@ -23,11 +23,11 @@ def get_car_description(model, brand, year):
             
         ]
     )
-
-
-
+    
     print("Resposta completa da API:", completion)
     return completion.choices[0].message.content
+
+
 
 
 
