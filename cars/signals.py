@@ -2,6 +2,7 @@ from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_save, post_delete
 from cars.models import Car, CarInventory
 from django.db.models import Sum
+from deepseek_api import client
 
 
 
@@ -21,7 +22,8 @@ def car_post_delete(sender, instance, **kwargs):
 
 @receiver(pre_save, sender=Car)
 def car_pre_save(sender, instance, **kwargs):
-    if not instance.bio:
-        instance.bio = 'Exemplo de bio'
+    if not instance.description:
+        generated_description = client.get_car_description(instance.model, instance.brand, instance.factory_year)
+        instance.description = generated_description
 
     
