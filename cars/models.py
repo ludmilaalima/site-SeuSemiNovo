@@ -31,7 +31,7 @@ class Car(models.Model):
         ]
     )
     plate = models.CharField(max_length=100, blank=True, null=True)
-    photo = models.ImageField(upload_to='cars/', blank=True, null=True)
+    photo = models.ImageField(upload_to='cars/', blank=True, null=True, default='cars/no_photo.jpg')
 
     price = models.DecimalField(
         max_digits=10,
